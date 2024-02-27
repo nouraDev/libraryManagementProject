@@ -1,0 +1,48 @@
+<div class="col-md-7 full-height" >
+    <form>
+
+        <div class="inputs">
+            <label for="name">Your name :</label>
+            <input
+            id="name"
+            [(ngModel)]="user.name"
+            type="text"
+            name="password"
+            placeholder="your name"
+            />
+            <label for="name">Your username :</label>
+            <input
+            id="username"
+            [(ngModel)]="user.username"
+            type="text"
+            name="password"
+            placeholder="your username"
+            />
+          <label for="email">Your adress email :</label>
+          <input
+            id="email"
+            [(ngModel)]="user.email"
+            type="text"
+            name="email"
+            placeholder="Email"
+          />
+          <label for="password">Your password :</label>
+          <input
+            id="password"
+            [(ngModel)]="user.password"
+            type="password"
+            name="password"
+            placeholder="Your password"
+          />
+    
+        </div>
+    
+        <button 
+          (click)="register()"
+          class="login btn-primary-color"
+        >
+          <div >Register</div>
+          <!-- <app-spinner *ngIf="loading"></app-spinner> -->
+        </button>
+      </form>
+</div>

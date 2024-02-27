@@ -1,0 +1,63 @@
+<div class='row'>
+    <div *ngIf="isAdmin" class="col-md-3 col-sm-4 col-xs-12 espace">
+      <div id="add-card"  class="floating-card card padded" (click)="goToAdd()">
+        <div class="puls">
+          <i class="fa fa-plus plus scale-up" aria-hidden="true"></i>
+          <h3 class="add-text" >Add new book</h3>
+        </div>
+      </div>
+    </div>
+    <div *ngFor="let book of books" class="col-md-3 col-sm-4 col-xs-12 espace">
+        <div class="floating-card card">
+            <div (click)="openBook(book.id)" class="row image-container" [ngStyle]="{'background-image': 'url(/assets/'+book.image+')'}"></div>            
+            <div *ngIf="isAdmin" class="more-dropdown" aria-hidden="true" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <div class="icon-container">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>              
+              </div>
+            </div>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li *ngIf="isAdmin" (click)="confirmDeletePopup(book.id)">Delete</li>
+              <li *ngIf="isAdmin" (click)="updateBook(book.id)">Update</li>
+
+            </ul>
+          <!-- <a class='text-color' [routerLink]="['/library/books/book-description',book.id]">  -->
+            <div class="row info-container">
+                <div class="col-xs-12 card-title">
+                    {{book.title}}
+                </div>
+                <div class="col-xs-12 card-sub-title">
+                    {{book.author}}
+                </div>
+                <div class="open-btn">
+                    <button  [disabled]="!book.IsAvailable"  (click)="borrowBook(book.id)" class="btn-primary-border">
+                        Borrow
+                    </button>
+                    <span class="availability-btn" *ngIf="book.IsAvailable">Available</span>
+                    <span class="availability-btn" *ngIf="!book.IsAvailable">Not Available</span>
+                </div>
+            </div>
+
+          <!-- </a> -->
+        </div>
+    </div>
+    <!-- Modal -->
+    <div id="confirmDelete" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title"> You really want to delete the book?</h4>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger supp-btn" (click)="deleteBook()">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <router-outlet></router-outlet>
+  

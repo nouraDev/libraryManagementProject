@@ -1,0 +1,25 @@
+<div class="contente-container">
+    <div class="row">
+        <div class="image-container" style="display: flex; flex-direction: row;">
+            <img [src]="'/assets/'+book.image" height="207" width="293" style="object-fit: cover;"/>
+            <div class="col-md-6 no-padding">
+                <div class="title">Book description</div>
+                {{book.description}}
+            </div>
+        </div>
+        <div class="information-container">         
+            <div class="col-md-12 no-padding first-row">
+                <h2 class="secondary">BOOK INFORMATIONS </h2>
+                <div class="borrow-container">
+                    <button [disabled]="book.isAvailable" (click)="borrowTheBook(book.id)" class="borrow-button"><p>borrow</p></button>
+                </div>
+            </div>
+            <div class="col-md-6 no-padding">
+                <div class="title">Title </div> {{book.title}}
+                <div class="title title-margin">Author </div> {{book.author}}
+                <div class="title title-margin">Genre </div> {{book.genre}}
+            </div>
+        </div>
+    </div>
+</div>
+

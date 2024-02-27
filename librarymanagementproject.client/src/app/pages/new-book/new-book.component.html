@@ -1,0 +1,41 @@
+<form [formGroup]="projectForm" class="margin-size" novalidate>
+
+    <div [@error]='error=="title"' class="floating-card">
+      <label id="title" class="required-star field-label">Book title </label>
+      <div class="row">
+        <input formControlName="title" placeholder="book title" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control">
+      </div>
+      <small *ngIf="formErrors.title" class="text-danger">
+        {{ formErrors.title }}
+      </small>
+    </div>
+  
+    <div class="floating-card" [@error]='error=="author"' >
+      <label class="required-star field-label" id='author'>Author </label>
+      <div class="row">
+        <div class="col-md-6">        
+          <small class="text-danger no-padding-left">
+            {{ formErrors.author }}Author
+          </small>
+        </div>  
+    </div>
+    <div [@error]='error=="description"' class="floating-card" >
+      <!-- ADDED REQUIRED-STAR -->
+      <label id="description" class="field-label">Book description</label>
+      <div class="row">
+        <input formControlName="description" placeholder="description" type = "text">
+      </div>
+      <small *ngIf="formErrors.description" class="text-danger">
+        {{ formErrors.description }}
+      </small>
+    </div>
+    <div id="q9" class="floating-card">
+      <label id="dateTravaux" class="field-label">Book image cover </label>     
+      <div class="row image-container">
+        <p-fileUpload mode="basic" chooseLabel="Naviguer" name="demo1" url="" [auto]="true"
+        (onUpload)="onUploadSingleImage($event)"></p-fileUpload>  
+      </div>
+    </div>
+  
+</form>
+  <div  class="center"><button (click)="addBook()" class="btn-primary-color">Add the Book +</button></div>

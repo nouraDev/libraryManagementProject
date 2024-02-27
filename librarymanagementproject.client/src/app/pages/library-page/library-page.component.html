@@ -1,0 +1,20 @@
+<div class="all">
+    <div class="container-fluid">
+      <div class="d-flex justify-content-center">
+        <input [(ngModel)]="searchValue" class="form-control me-2" type="search" placeholder="Search a book" aria-label="Search">
+        <button (click)="searchBook()" class="btn" >Search</button>
+      </div>
+      <div class="filter-dropdow" >
+        <p-dropdown  (onChange)="filterBooks()" [options]="booksGenres" [(ngModel)]="selectedGenre" placeholder="Select a genre" [editable]="false" optionLabel="genre"></p-dropdown>
+      </div>
+    </div>
+    <div >  
+      <div class="container-box">  
+        <app-books-list [books]="books"></app-books-list>
+      </div>
+    </div>
+  </div>
+
+
+
+  

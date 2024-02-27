@@ -1,0 +1,54 @@
+
+<div class="container-fluid" style="display: flex; flex-direction: row;">
+  <div class="col-md-5 hidden-sm hidden-xs full-height colored-side">
+    <div >
+      <h2 class="slogan">
+        Your e_library <br />
+        for an amazing reading
+      </h2>
+    </div>
+  </div>
+  <div class="col-md-7 full-height" >
+    <div class="connect">
+      <h1>Welcome to E_library</h1>
+      <br />
+      <form>
+        <div class="inputs">
+          <input
+            [(ngModel)]="user.email"
+            type="text"
+            name="email"
+            placeholder="Email"
+          />
+          <input
+            [(ngModel)]="user.password"
+            type="password"
+            name="password"
+            placeholder="Mot de passe"
+          />
+        </div>
+        <div *ngIf="loading"  id="wrong-form-login" class="alert alert-danger hide-wrong">
+          <span
+            class="glyphicon glyphicon-warning-sign"
+            aria-hidden="true"
+          ></span>
+          Username or password is <strong>incorrect!</strong>
+        </div>
+        <button 
+          (click)="login()"
+          class="login btn-primary-color"
+        >
+          <div >Sign in</div>
+          <!-- <app-spinner *ngIf="loading"></app-spinner> -->
+        </button>
+      </form>
+      <div class="login-help">
+        <a >Forgot your password</a>
+      </div>
+      <button  class="login width-250px btn-primary-border">
+        <div [routerLink]="['/auth/register']" >Register</div>
+        <!-- <app-spinner *ngIf="loading"></app-spinner> -->
+      </button>
+    </div>
+  </div>
+</div>
