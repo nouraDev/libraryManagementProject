@@ -31,11 +31,11 @@
                     {{book.author}}
                 </div>
                 <div class="open-btn">
-                    <button  [disabled]="!book.IsAvailable"  (click)="borrowBook(book.id)" class="btn-primary-border">
+                    <button   [ngStyle]="{'border-color': (book.isAvailable)? '#d1d1d1' :'#f6f6f6' ,'cursor': (book.isAvailable)?'pointer' :'not-allowed', 'background-color' : (book.isAvailable)? '' :'#f6f6f6'}" (click)="borrowBook(book.id)" class="btn-primary-border">
                         Borrow
                     </button>
-                    <span class="availability-btn" *ngIf="book.IsAvailable">Available</span>
-                    <span class="availability-btn" *ngIf="!book.IsAvailable">Not Available</span>
+                    <span class="availability-btn" *ngIf="book.isAvailable">Available</span>
+                    <span class="availability-btn" *ngIf="!book.isAvailable">Not Available</span>
                 </div>
             </div>
 

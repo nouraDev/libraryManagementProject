@@ -8,31 +8,40 @@ import { RegisterPageComponent } from './pages/auth/register-page/register-page.
 import { userRouteGuardGuard } from './_guards/user-route-guard.guard';
 import { NgModule } from '@angular/core';
 import { NewBookComponent } from './pages/new-book/new-book.component';
+import { AuthGuard } from './_guards/auth-guard.guard';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 
 
 
 export const routes: Routes = [
 
+  { path:'auth',
+  children:[
+    {path:'login', component:LoginPageComponent},
+    {path:'register',component:RegisterPageComponent}
+  ]
+  },  
 
   { path: 'library',
     children: [
-      {path:'library-page',component:LibraryPageComponent},
       { path:'books',component:BooksListComponent,
         children:[
-          { path:'new-book', component:NewBookComponent},
+          { path:'new-book', component:NewBookComponent,canActivate:[AuthGuard]},
           { path:'book-description/:bookId',component:SingleBookComponent} //,canActivate:[userRouteGuardGuard]
+        ]
+      },
+      {path:'library-page',component:LibraryPageComponent}
 
-        ]},
     ]
     
   },
-  { path:'auth',
+
+  { path:'profile', component:UserProfileComponent, canActivate:[AuthGuard]},
+  { path: '',
     children:[
-      {path:'login', component:LoginPageComponent},
-      {path:'register',component:RegisterPageComponent}
-    ]
+      { path: '', component: LibraryPageComponent }
+    ] 
   },
-  { path: '', component: LibraryPageComponent },
 
 
 ];

@@ -13,7 +13,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./register-page.component.scss']
 })
 export class RegisterPageComponent implements OnInit{
-  public user:any={email:"", password:"",name:"",username:"",role:"Member"};
+  public user:any={Email:"", Password:"",Name:"",Username:"",Role:""};
+  public isMember:boolean=false;
   private subscriptions: Array<Subscription> = [];
 
   constructor(
@@ -21,6 +22,7 @@ export class RegisterPageComponent implements OnInit{
     private router:Router
   ){}
   ngOnInit(): void {
+    this.isMember=false;
     throw new Error('Method not implemented.');
   }
 
@@ -38,6 +40,14 @@ export class RegisterPageComponent implements OnInit{
           console.log(error.message)
         })
     )
+  }
+
+  public naviagteToAdminRegister(){
+    this.router.navigate(['/auth/login']);
+  }
+  public naviagteToClientRegister(){
+    this.user.Role="Member";
+    this.isMember=true;
   }
 
   public ngOnDestroy(): void {

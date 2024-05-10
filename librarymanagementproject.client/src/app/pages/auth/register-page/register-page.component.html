@@ -1,41 +1,54 @@
 <div class="col-md-7 full-height" >
-    <form>
+  <div *ngIf="!isMember" style="    position: absolute; top: 122px; left: 36px;">
+    <img src="../../../../assets/identify.svg" style="    width: 31px;height: 31px;border: 1px solid #9B0F00;padding: 3px;border-radius: 4px;" alt="">
+    <h1>Choose your account type</h1>
+    <div (click)="naviagteToAdminRegister()" style="display: flex; flex-direction: row;justify-content: center;align-items: center;border: 1px solid #9B0F00;border-radius: 4px;height: 70px;">
+      <img src="../../../../assets/library-owner-red-color.svg" style="width: 16px;height: 16px;margin: 10px;width: 31px;height: 31px;border: 1px solid #9B0F00;padding: 3px;border-radius: 4px;">
+      <p style="margin: 0px;">Library owner</p>
+    </div>
+    <div (click)="naviagteToClientRegister()" style="display: flex; flex-direction: row;justify-content: center;align-items: center;border: 1px solid #9B0F00;border-radius: 4px;height: 70px;margin-top: 4px;">
+      <img src="../../../../assets/user-red-color.svg"  style="width: 16px;height: 16px;margin: 10px;width: 31px;height: 31px;border: 1px solid #9B0F00;padding: 3px;border-radius: 4px;">
+      <p style="margin: 0px;">Client</p>
+    </div>
 
-        <div class="inputs">
-            <label for="name">Your name :</label>
-            <input
-            id="name"
-            [(ngModel)]="user.name"
-            type="text"
-            name="password"
-            placeholder="your name"
-            />
-            <label for="name">Your username :</label>
-            <input
-            id="username"
-            [(ngModel)]="user.username"
-            type="text"
-            name="password"
-            placeholder="your username"
-            />
-          <label for="email">Your adress email :</label>
-          <input
-            id="email"
-            [(ngModel)]="user.email"
-            type="text"
-            name="email"
-            placeholder="Email"
-          />
-          <label for="password">Your password :</label>
-          <input
-            id="password"
-            [(ngModel)]="user.password"
-            type="password"
-            name="password"
-            placeholder="Your password"
-          />
-    
-        </div>
+  </div>
+
+    <form *ngIf="isMember">
+      <div class="inputs">
+        <label for="name">Your name :</label>
+        <input
+        id="name"
+        [(ngModel)]="user.Name"
+        type="text"
+        name="password"
+        placeholder="your name"
+        />
+        <label for="username">Your username :</label>
+        <input
+        id="username"
+        [(ngModel)]="user.Username"
+        type="text"
+        name="password"
+        placeholder="your username"
+        />
+        <label for="email">Your adress email :</label>
+        <input
+          id="email"
+          [(ngModel)]="user.Email"
+          type="text"
+          name="email"
+          placeholder="Email"
+        />
+        <label for="password">Your password :</label>
+        <input
+          id="password"
+          [(ngModel)]="user.Password"
+          type="password"
+          name="password"
+          placeholder="Your password"
+        />
+  
+      </div>
     
         <button 
           (click)="register()"

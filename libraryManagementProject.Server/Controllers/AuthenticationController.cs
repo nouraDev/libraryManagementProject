@@ -1,6 +1,7 @@
 ﻿using libraryManagementProject.Server.DAOContext;
 using libraryManagementProject.Server.Model;
 using libraryManagementProject.Server.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -19,48 +20,56 @@ namespace libraryManagementProject.Server.Controllers
         }
 
         [HttpPost("register")]
-        public ActionResult Register(User user)
+        public ActionResult Register(Register userRegister)
         {
             // Validate user input
-            if (user == null)
+            if (userRegister == null)
             {
                 return BadRequest("Invalid user data");
             }
 
-            if (string.IsNullOrEmpty(user.Username) || string.IsNullOrEmpty(user.Password) || string.IsNullOrEmpty(user.Email))
+            if (string.IsNullOrEmpty(userRegister.Username) || string.IsNullOrEmpty(userRegister.Password) || string.IsNullOrEmpty(userRegister.Email))
             {
 
                 return BadRequest("Username, email, and password are required");
             }
 
             // Check if the username is unique
-            if (_dbcontext.Users.Any(u => u.Username == user.Username))
+            if (_dbcontext.Users.Any(u => u.Username == userRegister.Username))
             {
                 return BadRequest("Username is already taken");
             }
 
             // Check if the email is unique
-            if (_dbcontext.Users.Any(u => u.Email == user.Email))
+            if (_dbcontext.Users.Any(u => u.Email == userRegister.Email))
             {
                 return BadRequest("Email is already registered");
             }
 
             // Validate email format 
-            if (!IsValidEmail(user.Email))
+            if (!IsValidEmail(userRegister.Email))
             {
                 return BadRequest("Invalid email format");
             }
 
             // Hash the password 
-            user.Password = HashPassword(user.Password);
+            userRegister.Password = HashPassword(userRegister.Password);
 
             // Set default role for new users
-            user.Role = "Member";
+           // user.Role = "Member";
+           User user= new User
+           {
+               Name = userRegister.Name,
+               Username = userRegister.Username,
+               Email = userRegister.Email,
+               Password = userRegister.Password,
+               Role = userRegister.Role
+           };
 
             _dbcontext.Users.Add(user);
             _dbcontext.SaveChanges();
 
-            return Ok( user);
+            return Ok(userRegister);
         }
 
         // Helper method for email validation
@@ -102,6 +111,15 @@ namespace libraryManagementProject.Server.Controllers
         {
             return BCrypt.Net.BCrypt.Verify(inputPassword, hashedPassword);
         }
-        
+
+        [HttpGet("check-auth")]
+        [Authorize(Roles = "Member")]
+        public IActionResult CheckAuthentication()
+        {
+            // If the user is authorized, return Ok
+
+            return Ok(new { response = true });
+        }
+
     }
 }

@@ -1,18 +1,56 @@
-<div class="all">
-    <div class="container-fluid">
+<div class="all" style="">
+    <div class="container-fluid" style="position: fixed;     z-index: 12;">
+      <div class="filter-dropdow" >
+        <!-- <p-dropdown  (onChange)="filterBooks()" [options]="booksGenres" [(ngModel)]="selectedGenre" placeholder="Select a genre" [editable]="false" optionLabel="genre"></p-dropdown> -->
+        <div style="    margin-left: 8px; cursor: pointer;">
+          <span class="category-label">CATEGORY MENU </span>
+          <img (click)="toggleDropdown()" [src]="'assets/menu-bars.svg'" style="width: 20px; height: 20px; cursor: pointer;" alt="">
+        </div>
+
+        <div *ngIf="showDropdown" [class.show]="showDropdown" class="dropdown-content">
+          <!-- Your dropdown content goes here -->
+          <div *ngFor=" let genre of booksGenres">
+            <a (click)="filterBooks(genre.genre)">{{genre.genre}}</a>
+          </div>
+        </div>
+      </div>
       <div class="d-flex justify-content-center">
         <input [(ngModel)]="searchValue" class="form-control me-2" type="search" placeholder="Search a book" aria-label="Search">
-        <button (click)="searchBook()" class="btn" >Search</button>
-      </div>
-      <div class="filter-dropdow" >
-        <p-dropdown  (onChange)="filterBooks()" [options]="booksGenres" [(ngModel)]="selectedGenre" placeholder="Select a genre" [editable]="false" optionLabel="genre"></p-dropdown>
+        <button (click)="searchBook()" class="btn" ><img [src]="'assets/search-icon.svg'" style="width: 16px; height: 16px;"></button>
       </div>
     </div>
-    <div >  
-      <div class="container-box">  
-        <app-books-list [books]="books"></app-books-list>
+    <section>
+      <div class="" style="position: absolute;top: 121px;height: 84%;width: 100%;background-size: cover;background-position: center;">
+        <div style="position: absolute;top: 187px;left: 56px;color: white;z-index: 11;">
+            <h1 style="color: #D14435;">Borrow your favorite BOOK for FREE</h1>
+            <p style="color: black;text-align: -webkit-center;">E-Library is a platform that offers you free, original books to read <br> then return them back to the library</p>
+            <button  (click)="scrollToSection('book-list')" style="height: 35px;border: 1px solid #D14435;background: #D14435;text-align: center;border-radius: 5px;color: white;width: 145px;position: relative;left: 226px;top: 25px;">Borrow now <img [src]="'assets/book-icon.svg'" style="height: 12px; width: 12px;" alt=""></button>
+        </div>
+        <div style="position: absolute;height: 100%;width: 100%;background-image: url(assets/image-cover.png);mask-image: linear-gradient(to right, transparent 1%, black 47%);background-size: cover;background-position: center;z-index: 2;    "></div>
       </div>
-    </div>
+    </section>
+    <section id="book-list" style=" position: relative;top: 752px;height: 486px;">
+      <div  >  
+        <!-- <div style="display: flex; flex-direction: row; justify-content: center;">
+          <button (click)="getBooks()" [ngStyle]="{'background-color': !changeButtonBackground ? '#D14031' : '', 'color': !changeButtonBackground ? 'white' : ''}" style="    border: none;height: 40px;width: 110px;border-radius: 4px; ">all</button>
+          <div *ngFor=" let genre of booksGenres; index as i" >
+            <button id="i" (click)="filterBooks(genre.genre)" [ngStyle]="{'background-color': changeButtonBackground ? '#D14031' : '', 'color': changeButtonBackground ? 'white' : ''}" style="    border: none;height: 40px;width: 110px;border-radius: 4px; ">{{genre.genre}}</button>
+          </div>
+        </div> -->
+        <div style="display: flex; flex-direction: row; justify-content: center;">
+          <button (click)="getBooks()" [ngStyle]="{'background-color': changeAllButtonBackground ? '#D14031' : '', 'color': changeAllButtonBackground ? 'white' : ''}" style="    border: none;height: 40px;width: 110px;border-radius: 4px; ">all</button>
+          <ng-container *ngFor="let genre of booksGenres">
+            <button (click)="filterBooks(genre.genre)" [ngStyle]="getButtonStyle(genre.genre)">{{genre.genre}}</button>
+          </ng-container>
+        </div>
+
+        <div class="container-box">  
+          <app-books-list *ngIf="loadingData" [books]="books"></app-books-list>
+        </div>
+      </div>
+    </section>
+
+
   </div>
 
 

@@ -1,17 +1,29 @@
 .full-height{
-    height: 92vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  height: 76vh;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  position: absolute;
+  left: 71vh;
+  border-radius: 4px;
+  box-shadow: rgba(100, 100, 111, 0.2) 3px 7px 29px 3px;
+  top: 101px;
+  padding: 20px;
+  width: 71vh;
   }
   .inputs{
-    padding: 30px 50px;
+    padding: 6px 42px;
+    position: absolute;
+    top: 0;
   }
   .login {
     display: block;
     margin-bottom: 10px;
     position: relative;
     font-size: 20px;
+    top: 37vh;
+    left: 22vh;
+    
   }
   
   .connect{
@@ -75,7 +87,7 @@ input[type=text], input[type=password] {
     text-align: center;
     line-height: 50px;
     height: 50px;
-    background: #A770EF !important;
+    background: #D14031 !important;
     display: block;
     margin: 20px auto;
     border: 0px;
@@ -92,4 +104,6 @@ input[type=text], input[type=password] {
     margin-bottom: 10px;
     position: relative;
     font-size: 20px;
+    top: 37vh;
+    left: 22vh;
   }

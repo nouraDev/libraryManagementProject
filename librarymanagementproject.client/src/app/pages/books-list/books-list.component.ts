@@ -1,9 +1,10 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { CapitalizePipe } from 'src/app/_pipes/capitalize.pipe';
 import { BookManagementServiceService } from 'src/app/services/book-management-service.service';
 import { Subscription } from 'rxjs';
+import { AuthServiceService } from 'src/app/services/auth-service.service';
 
 declare var $:any;
 
@@ -22,17 +23,33 @@ export class BooksListComponent implements OnInit, OnChanges {
 
   constructor(
     private router:Router,
-    private bookmanagementService:BookManagementServiceService
+    private bookmanagementService:BookManagementServiceService,
+    private cd: ChangeDetectorRef,
+    private authService:AuthServiceService
   ){
 
   }
   ngOnChanges(changes: SimpleChanges): void {
   }
   ngOnInit(): void {
+
   }
 
   public goToAdd(){
     this.router.navigate(['/library/books/new-book'])
+
+  }
+  public getBooks(){
+    this.subscriptions.push(
+      this.bookmanagementService.getBooks().subscribe(          
+        data => {
+         this.books=data;   
+         console.log('books :', this.books)
+      },
+      error => {
+        console.log(error.message)
+      })
+    )
 
   }
 
@@ -74,21 +91,29 @@ export class BooksListComponent implements OnInit, OnChanges {
   }
 
   public borrowBook(bookId:number){
-    this.subscriptions.push(    
-      this.bookmanagementService.borrowBook(bookId).subscribe(
-      data => {
-        alert("you've borrowed the book, check your profile")
-      },
-      error => {
-        console.log(error.message)
-    })
-    )
+    if(localStorage.getItem('currentUser')){
+      let user=localStorage.getItem('currentUser')
+      console.log('user: ',user)
+      //this.subscriptions.push(    
+        this.bookmanagementService.borrowBook(bookId).subscribe(
+        data => {
+          alert("you've borrowed the book, check your profile")
+        },
+        error => {
+          console.log(error.message)
+      })
+      //)
+    }
+    else{
+      this.router.navigate(['/auth/login']);
+    }
+
 
   }
   public ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription: Subscription) => {
-        subscription.unsubscribe();
-    });
+    // this.subscriptions.forEach((subscription: Subscription) => {
+    //     subscription.unsubscribe();
+    // });
   }
 
 }

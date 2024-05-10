@@ -1,5 +1,9 @@
 .container-fluid {
   padding: 0px !important;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  top: 56px;
 }
 
 .full-height{
@@ -10,9 +14,9 @@
 }
 .colored-side{
   background-image: url("/src/assets/library.png");
-  background: #A770EF !important;  
-  background: -webkit-linear-gradient(to right, #FDB99B, #CF8BF3, #A770EF);  
-  background: linear-gradient(to right, #FDB99B, #CF8BF3, #A770EF) !important; 
+  background: #E2E2E1 !important;  
+  background: -webkit-linear-gradient(to right, #FDB99B, #E2E2E1, #bebebc);  
+  background: linear-gradient(to right, #FDB99B, #E2E2E1, #bebebc) !important; 
 ;
 }
 .library-img{
@@ -38,7 +42,7 @@
   margin-top: 20px;
   text-align: center;
   font-size: 22px;
-  color: white;
+  color: #D14031;
   font-weight: bold;
 }
 .loginmodal-submit {
@@ -60,18 +64,20 @@
 .btn-primary-color {
   text-align: center;
   line-height: 50px;
-  height: 50px;
-  background: #A770EF !important;
+  width: 200px;
+  padding: 0px 15px;
+  background: white;
   display: block;
   margin: 20px auto;
   border: 0px;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 800;
   border-radius: 5px;
-  -webkit-transition-duration: 1s;
+  box-shadow: 0 0 1px #ccc;
+  -webkit-transition-duration: 0.1s;
   -webkit-transition-timing-function: linear;
-  padding: 0px 50px;
+  box-shadow: 0px 0 0 #D14031 inset;
+  border: 1px solid #D14031;
+  background: #D14031 !important;
+  color: white;
 }
 
 
@@ -108,6 +114,7 @@ input[type=text]:hover, input[type=password]:hover {
  }
 
  .btn-primary-border {
+
   text-align: center;
   line-height: 50px;
   width: 200px;
@@ -117,12 +124,12 @@ input[type=text]:hover, input[type=password]:hover {
   margin: 20px auto;
   border: 0px;
   border-radius: 5px;
-  color: #A770EF !important;
+  color: #D14031 !important;
   box-shadow: 0 0 1px #ccc;
   -webkit-transition-duration: 0.1s;
   -webkit-transition-timing-function: linear;
-  box-shadow: 0px 0 0 #A770EF inset;
-  border: 1px solid #A770EF;
+  box-shadow: 0px 0 0 #D14031 inset;
+  border: 1px solid #D14031;
 }
 .login-help{
   font-size: 14px;
@@ -134,6 +141,6 @@ h1 {
   text-align: center;
   font-size: 35px;
   font-weight: bold;
-  color: #A770EF;
-  margin-bottom:12px;
+  color: #D14031;
+  margin-bottom: 12px;
 }
